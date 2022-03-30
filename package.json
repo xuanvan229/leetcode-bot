@@ -1,6 +1,6 @@
 {
   "name": "leetcode-bot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Slack bot posting a LeetCode algorithm question every weekday.",
   "main": "index.ts",
   "author": "Yuria Nishimura",
