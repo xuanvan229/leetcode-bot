@@ -32,7 +32,7 @@ const main = async () => {
 };
 
 // API call
-async function getData(url) {
+async function getData(url: string) {
   const { data } = await axios({
     method: 'get',
     url,
@@ -41,30 +41,30 @@ async function getData(url) {
 }
 
 // Get all non-paid questions
-function getFreeQuestions(data) {
+function getFreeQuestions(data: any) {
   return data.stat_status_pairs.filter(
-    ({ difficulty, paid_only }) => difficulty.level === 1 && !paid_only,
+    ({ difficulty, paid_only }: any) => difficulty.level === 1 && !paid_only,
   );
 }
 
 // Get 60 recommended question IDs
-function generateListIds(data) {
+function generateListIds(data: any) {
   const ids = new Set();
-  data.forEach(({ id }) => {
+  data.forEach(({ id }: { id: number }) => {
     ids.add(id);
   });
   return ids;
 }
 
 // Get 60 recommended questions
-function getListQuestions(data, ids) {
-  return data.stat_status_pairs.filter(({ stat }) =>
+function getListQuestions(data: any, ids: any) {
+  return data.stat_status_pairs.filter(({ stat }: any) =>
     ids.has(stat.frontend_question_id),
   );
 }
 
 // Pick a qestion to post
-function pickQuestion(data) {
+function pickQuestion(data: any) {
   const i = Math.floor(Math.random() * data.length);
   return data[i];
 }
@@ -90,7 +90,7 @@ async function postQuestion(text: string) {
   console.info(status, config.data);
 }
 
-console.log('cron', cron);
 cron.schedule('* */8 * * *', () => {
+  console.log('RUN AT ', new Date());
   main();
 });
