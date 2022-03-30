@@ -90,7 +90,7 @@ async function postQuestion(text: string) {
   console.info(status, config.data);
 }
 
-cron.schedule('* */8 * * *', () => {
+cron.schedule('* 19 * * *', () => {
   console.log('RUN AT ', new Date());
   main();
 });
